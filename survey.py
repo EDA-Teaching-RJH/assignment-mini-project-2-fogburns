@@ -1,4 +1,5 @@
 import sys
+import cowsay
 
 y_l = ["yes", "y"]
 n_l = ["no", "n"]
@@ -22,3 +23,19 @@ def get_yn(user_input):
         else:
             print("<-<--<---ERROR--->-->->\n== Simple yes or no ==\n------ TRY AGAIN ------")
             return None
+        
+def initial_q():
+    while True:
+        cowsay.trex("WELCOME!")
+        user_input = input("Want to do some epic questionaire? Y/N>> ")
+        yn_0 = get_yn(user_input)
+        if yn_0 == True:
+            print("Continuing...")
+            break
+        elif yn_0 == False:
+            print("Exiting...")
+            exit()
+        else:
+            initial_q()
+        break
+initial_q()
