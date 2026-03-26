@@ -1,9 +1,18 @@
 import random
+from dataclasses import dataclass
 
+@dataclass
+class Timetype:
+    years: int
+    months: int
+    days: int
+    hours: int
+    trate: float
+    
 class Calculator:
     def __init__(self, seed=None):
         self.rng = random.Random(seed)
-        
+
     def compute(erate, rate, stars, ft, inch, colours, sibling, wage, age):
         number = random.uniform(1.0,5.0)
         trate = erate + int(rate) / 2
