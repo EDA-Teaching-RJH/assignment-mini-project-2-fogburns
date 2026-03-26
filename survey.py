@@ -1,22 +1,28 @@
 import sys
-import cowsay
+import cowsay 
 import re
 from calc import Calculator
 import random
 import json
+'''Import modules, to be used later in code'''
 
-names = ["Player","Alex","Sam","Jamie","Jack"]
 stard={"Capricorn":2.3,"Gemini":3.4,"Saggitarius":4.5,"Cancer":5.6,"Taurus":6.7,"Scorpio":7.8,"Aquarius":8.9,"Aries":9.1,"Leo":10.2,"Libra":11.3,"Pisces":12.4,"Virgo":13.5}
 colourd={'Red':2,"Orange":3,"Yellow":4,"Green":5,"Blue":6,"Indigo":7,"Violet":8}
+'''Dictionaries to return keys for values, mainly used for calculations'''
+
+names = ["Player","Alex","Sam","Jamie","Jack"] #Available random names
 y_l = ["yes", "y"]
 n_l = ["no", "n"]
 yn_l =[y_l,n_l]
+'''Lists mainly used for checking input'''
 
 def line():
+    '''Line function, simplifies code later on to be easily read. Ensures same line is printed each time'''
     print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^") 
     return
 
 def sys_check():
+    '''Checks version of python being used, if under 3.8 it wont run'''
     major = (sys.version_info[0])
     minor = (sys.version_info[1])
     if major < 3 and minor < 8:
@@ -25,21 +31,23 @@ def sys_check():
         print("System check passed. Running on Python ",major,".",minor)
 
 def get_yn(user_input):
+    '''Simplifies code, makes other functions easier to read. Used when a yes or no input is required'''
     while True:
         yn_in = user_input.strip().lower()
         if yn_in in (y_l):
-            return True
+            return True # Returns as bool
         elif yn_in in (n_l):
-            return False  
+            return False  # Returns as bool
         else:
             print("<-<--<---ERROR--->-->->\n== Simple yes or no ==\n------ TRY AGAIN ------")
-            return None
+            return None # Returns as bool
         
 def initial_q():
+    '''Initial question to start the rest of the script'''
     while True:
         cowsay.trex("WELCOME!")
         user_input = input("Want to do some epic questionaire? Y/N>> ")
-        yn_0 = get_yn(user_input)
+        yn_0 = get_yn(user_input) #uses get_yn()
         if yn_0 == True:
             print("Continuing...")
             break
@@ -47,15 +55,16 @@ def initial_q():
             print("Exiting...")
             exit()
         else:
-            initial_q()
+            initial_q() # If returns None(invalid input) it returns back to initial question
         break
 
 def rate_q():
+    '''Promps user to give a rating of the cosway.trex'''
     while True:
             rat = input("Before we do this, how would you rate this dino out of 10?>>") 
             try:
-                rate = int(rat)
-                if 20 >= rate > 10:
+                rate = int(rat) # Runs if a whole number is input
+                if 20 >= rate > 10: # Allowed higher up to a point so script cant be exploited
                     print("Wow big number, I got hope for you")
                     line()
                 elif 10 >= rate >= 7:
@@ -73,7 +82,7 @@ def rate_q():
                 return rate
             except ValueError:
                 try:
-                    rate = float(rat)
+                    rate = float(rat) # Runs if the input has a decimal to give more dialogue
                     print("Okayy pedantic much?. I can tell this will be, Fun.")
                     line()
                 except ValueError:
@@ -82,17 +91,19 @@ def rate_q():
                 return rate
 
 def name_q():
+    '''Asks user for name, used in other parts of code to feel tailored to user. Also used when giving results of survey'''
     while True:
-        name = input("- 1 - Okay whats your name?>>").strip().title()
-        if not re.match("^[a-zA-Z]+$", name):
-            print("<-<--<---ERROR--->-->->\n== Aa -Zz Only ==\n------ TRY AGAIN ------")
-            continue
-        else:
+        name = input("- 1 - Okay whats your name?>>").strip().title() # Unnessacary whitespace is removed and first letter is capitalised if not
+        if re.match("^[a-zA-Z]+$", name): # Runs to only allow normal string letter input (Aa - Zz)
             print("Wavvy bones "+ name +" cool name. alright NEXT QUESTION!")
             line()
+        else:
+            print("<-<--<---ERROR--->-->->\n== Aa -Zz Only ==\n------ TRY AGAIN ------") 
+            continue
         return name
     
-def age_q(name):
+def age_q(name): # Accessing the name of input from user to be used inside function
+    '''Prompts user to give their age, used in calculations and some dialogue options'''
     while True:
         try:
             age = int(input("- 2 - How old are you "+ str(name) +"?>>")) 
@@ -116,14 +127,15 @@ def age_q(name):
                 print("<-<--<---ERROR--->-->->\n== Not even possible ==\n------ TRY AGAIN ------")
                 continue
             return age
-        except ValueError:
+        except ValueError: # If anything else than a number gets input
             print("<-<--<---ERROR--->-->->\n== Dude numbers only ==\n------ TRY AGAIN ------")
             continue    
 
 def height_q(name):
+    '''Prompts user of their height in ft and inches'''
     while True:
         try:
-            ft, inch = map(int, input("- 3 - How tall are you in ft? Invasive question? complain to my boss\n(Show as: eg 6ft 1inch = 6 1)>>").split())
+            ft, inch = map(int, input("- 3 - How tall are you in ft? Invasive question? complain to my boss\n(Show as: eg 6ft 1inch = 6 1)>>").split()) # Maps both variables as integers
             if inch > 12:
                 print("<-<--<---ERROR--->-->->\n----- Quit Lying -----\n------ TRY AGAIN ------")
                 continue
@@ -160,13 +172,14 @@ def height_q(name):
         return ft, inch
     
 def colour_q():
+    '''Prompts user for their favourite colour'''
     while True:
         try:
-            colour = str(input("- 4 - Choose ur most favourite rainbow colour \n--->Red   Orange   Yellow   Green   Blue   Indigo   Violet<--- >>")).strip().title() 
+            colour = str(input("- 4 - Choose ur most favourite rainbow colour \n--->Red   Orange   Yellow   Green   Blue   Indigo   Violet<--- >>")).strip().title() # Takes away unnessacary whitespace and titles input
             if not re.match("^[a-zA-Z]+$", colour):
                 print("<-<--<---ERROR--->-->->\n==== Aa -Zz Only ====\n------ TRY AGAIN ------")
                 continue
-            elif colour not in colourd:
+            elif colour not in colourd: # References the dictionary at top of code
                 print("<-<--<---ERROR--->-->->\n---- Dude, ROYGBIV ----\n------ TRY AGAIN ------")
                 continue
             else:
@@ -177,6 +190,7 @@ def colour_q():
         return colour
     
 def sibling_q():
+    '''Prompts user of the amount of siblings they have'''
     while True:
         try:
             sib = int(input("- 5 - How many brothers and sisters u got on this earth?>>"))
