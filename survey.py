@@ -192,6 +192,31 @@ def sibling_q():
                 continue
         return sib
 
+def job_q(name, age):
+    while True:
+        user_input = (input("- 6 - You worked a day in ur life? Y/N>>")) 
+        yn_1 = get_yn(user_input)
+        if yn_1 == True:
+            print("Oh nice I like seeing a contributing member of society")
+            line()
+            try:
+                wage = float(input("- 6.5 - How much do/did you make an hour?>>")) 
+                if wage >= 15:
+                    print("Okayy if u say so I mean I cant force u to tell the truth..")
+                    line()
+                else:
+                    print("Hard life "+ name + " bro, GET UR MONEY UP")
+                    line()
+            except ValueError:
+                print("<-<--<---ERROR--->-->->\n== Dude numbers only ==\n------ TRY AGAIN ------")
+                continue
+            return wage, yn_1
+        elif yn_1 == False:
+            wage = 0
+            print("Wow at the big age of "+ str(age) + " still nothing to show for it..")
+            line()
+            return wage, yn_1
+
 initial_q()
 sys_check()
 rate_q()
@@ -200,5 +225,6 @@ age = age_q(name)
 ft, inch = height_q(name)
 colour = colour_q()
 sibling = sibling_q()
+wage, yn_1 = job_q(name, age)
 
-print(name,age,ft,inch,colour,sibling)
+print(name,age,ft,inch,colour,sibling,wage,yn_1)
