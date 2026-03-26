@@ -364,31 +364,35 @@ def main():
     '''Gains all values for variables, prints them for the user and decides the order or functions'''
     initial_q()
     sys_check()
-    user_input = input("Auto fill survey? Y/N>> ")
-    yn_2 = get_yn(user_input)
-    if yn_2 == True:
-        data = auto_fill()
-        rate = data["rate"]
-        name = data["name"]
-        age = data["age"]
-        ft = data["ft"]
-        inch = data["inch"]
-        colour = data["colour"]
-        sibling = data["siblings"]
-        yn_1 = data["job"]
-        wage = data["wage"]
-        star = data["star"]
-        erate = data["erate"]
-    elif yn_2 == False:
-        rate = rate_q()
-        name = name_q()
-        age = age_q(name)
-        ft, inch = height_q(name)
-        colour = colour_q()
-        sibling = sibling_q()
-        wage, yn_1 = job_q(name, age)
-        star = star_q()
-        erate = erate_q(rate, name)
+    while True:
+        user_input = input("Auto fill survey? Y/N>> ")
+        yn_2 = get_yn(user_input)
+        if yn_2 == True:
+            data = auto_fill()
+            rate = data["rate"]
+            name = data["name"]
+            age = data["age"]
+            ft = data["ft"]
+            inch = data["inch"]
+            colour = data["colour"]
+            sibling = data["siblings"]
+            yn_1 = data["job"]
+            wage = data["wage"]
+            star = data["star"]
+            erate = data["erate"]
+        elif yn_2 == False:
+            rate = rate_q()
+            name = name_q()
+            age = age_q(name)
+            ft, inch = height_q(name)
+            colour = colour_q()
+            sibling = sibling_q()
+            wage, yn_1 = job_q(name, age)
+            star = star_q()
+            erate = erate_q(rate, name)
+        else:
+            continue
+        break
     stars = check_star(star)
     colours = check_colour(colour)
     time = Calculator.compute(erate, rate, stars, ft, inch, colours, sibling, wage, age)
