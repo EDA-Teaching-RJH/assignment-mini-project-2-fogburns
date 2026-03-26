@@ -1,5 +1,6 @@
 import sys
 import cowsay
+import re
 
 y_l = ["yes", "y"]
 n_l = ["no", "n"]
@@ -74,7 +75,18 @@ def rate_q():
                     continue
                 return rate
 
+def name_q():
+    while True:
+        name = input("- 1 - Okay whats your name?>>").strip().title()
+        if not re.match("^[a-zA-Z]+$", name):
+            print("<-<--<---ERROR--->-->->\n== Aa -Zz Only ==\n------ TRY AGAIN ------")
+            continue
+        else:
+            print("Wavvy bones "+ name +" cool name. alright NEXT QUESTION!")
+            line()
+        return name
 
 initial_q()
 sys_check()
 rate_q()
+name_q()
