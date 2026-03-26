@@ -263,13 +263,13 @@ def erate_q(rate, name): # Uses defined variables as parameters to be used insid
         rate_2 = input("Okay now you have seen whats what, whats the rating now out of 10??>>")
         try:
             erate = int(rate_2)
-            if erate > 10 and rate > 10:
+            if 20 >= erate > 10 and 20 >= rate > 10:
                 print("Okay stayin stupid I feel you")
                 line()
-            elif erate + rate >= 10:
+            elif erate + rate >= 10 and erate > rate:
                 print("Hell yeah I knew I could sway ya")
                 line()
-            elif erate > 10 and rate < 10:
+            elif 10 >= erate > 10 and rate < 10:
                 print("Nice "+name+", this test definately dummed you down abit")
                 line()
             elif 10 >= erate >= 7:
