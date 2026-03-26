@@ -3,6 +3,7 @@ import cowsay
 import re
 from calc import Calculator
 import random
+import json
 
 names = ["Player","Alex","Sam","Jamie","Jack"]
 stard={"Capricorn":2.3,"Gemini":3.4,"Saggitarius":4.5,"Cancer":5.6,"Taurus":6.7,"Scorpio":7.8,"Aquarius":8.9,"Aries":9.1,"Leo":10.2,"Libra":11.3,"Pisces":12.4,"Virgo":13.5}
@@ -304,6 +305,17 @@ def auto_fill():
         "wage": round(random.uniform(8.0, 25.0), 2),
         "star": random.choice(list(stard.keys())),
         "erate": random.randint(1, 10)}
+
+def save_r(results):
+    filename = "results.json"
+    try:
+        with open(filename, 'w', newline='') as file:
+            json.dump(results, file, indent=4)
+            print("Results saved successfully!")
+            print(f"Results saved to {filename}")
+    except ValueError:
+        print("An error occurred while saving the results.\n", ValueError)
+        keep_r(results)
 
 def main():
     initial_q()
