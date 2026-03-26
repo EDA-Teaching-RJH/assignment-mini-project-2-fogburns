@@ -217,6 +217,26 @@ def job_q(name, age):
             line()
             return wage, yn_1
 
+def star_q():
+    while True:
+        try:
+            sta = str(input("- 7 - Okay lets get atrological whats your star sign?>>"))
+            star = sta.strip().title()
+            if not re.match("^[a-zA-Z]+$", star):
+                print("<-<--<---ERROR--->-->->\n==== Aa -Zz Only ====\n------ TRY AGAIN ------")
+                continue
+            elif star not in stard:
+                print("<-<--<---ERROR--->-->->\n--- Is that a sign? ---\n------ TRY AGAIN ------")
+                continue
+            else:
+                print("Oo.. I hear bad things from your.. type. Moving on")
+                line()
+                break
+        except ValueError:
+            print("<-<--<---ERROR--->-->->\n==== Aa -Zz Only ====\n------ TRY AGAIN ------")
+            continue
+    return star
+
 initial_q()
 sys_check()
 rate_q()
@@ -226,5 +246,6 @@ ft, inch = height_q(name)
 colour = colour_q()
 sibling = sibling_q()
 wage, yn_1 = job_q(name, age)
+star = star_q()
 
 print(name,age,ft,inch,colour,sibling,wage,yn_1)
