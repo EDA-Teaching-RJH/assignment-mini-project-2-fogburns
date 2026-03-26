@@ -238,9 +238,52 @@ def star_q():
             continue
     return star
 
+def erate_q(rate, name):
+    while True:
+        rate_2 = input("Okay now you have seen whats what, whats the rating now out of 10??>>")
+        try:
+            erate = int(rate_2)
+            if erate > 10 and rate > 10:
+                print("Okay stayin stupid I feel you")
+                line()
+            elif erate + rate >= 10:
+                print("Hell yeah I knew I could sway ya")
+                line()
+            elif erate > 10 and rate < 10:
+                print("Nice "+name+", this test definately dummed you down abit")
+                line()
+            elif 10 >= erate >= 7:
+                print("Ayy I appreciate it "+name)
+                line() 
+            elif 7 > erate >= 4:
+                print("Oh pretty average guess I aint worth it HUH??")
+                line()
+            elif 4 > erate >= 1:
+                print("Oh well.. It is what it is")
+                line()
+            elif erate == 0:
+                print("You will regret this...")
+                line()
+            else:
+                print("<-<--<---ERROR--->-->->\n== Not even possible ==\n------ TRY AGAIN ------")
+                continue
+            return erate
+        except ValueError:
+            try:
+                erate = float(rate_2)
+                if isinstance(erate, float) and isinstance(rate, float):
+                    print("Okayyy dude you dont have to be so serious.. Seriously get some friends")
+                elif isinstance(erate, float) and isinstance(rate, int):
+                    print("Hmm weirdly specific but okay")
+            except ValueError:
+                print("<-<--<---ERROR--->-->->\n==== Dude numbers only ====\n------ TRY AGAIN ------")
+                continue
+            return erate
+
+
 initial_q()
 sys_check()
-rate_q()
+rate = rate_q()
 name = name_q()
 age = age_q(name)
 ft, inch = height_q(name)
@@ -248,5 +291,5 @@ colour = colour_q()
 sibling = sibling_q()
 wage, yn_1 = job_q(name, age)
 star = star_q()
-
-print(name,age,ft,inch,colour,sibling,wage,yn_1)
+erate = erate_q(rate,name)
+print(name,age,ft,inch,colour,sibling,wage,yn_1,star,erate)
