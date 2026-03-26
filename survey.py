@@ -114,8 +114,50 @@ def age_q(name):
             print("<-<--<---ERROR--->-->->\n== Dude numbers only ==\n------ TRY AGAIN ------")
             continue    
 
+def height_q(name):
+    while True:
+        try:
+            ft, inch = map(int, input("- 3 - How tall are you in ft? Invasive question? complain to my boss\n(Show as: eg 6ft 1inch = 6 1)>>").split())
+            if inch > 12:
+                print("<-<--<---ERROR--->-->->\n----- Quit Lying -----\n------ TRY AGAIN ------")
+                continue
+            elif inch <= 0 or inch < 0:
+                print("<-<--<---ERROR--->-->->\n- A minus number huh? -\n------ TRY AGAIN ------")
+                continue
+            try:
+                if ft >=6 and 12 >= inch >= 7:
+                    print("Go back to the zoo u damn FREAK!")
+                    line()
+                elif ft == 7 and 12 >= inch >= 0:
+                    print("Glad im behind a screen right now.")
+                elif ft == 6 and 7 > inch >= 0:
+                    print("Alr alr no need to brag")
+                    line()
+                elif ft == 5 and 11 >= inch >= 10:
+                    print("Unlucky Bro...")
+                    line()
+                elif ft == 5 and 9 >= inch >= 5 :
+                    print("Pretty average stuff so far")
+                    line()
+                elif 5 == ft and 4 >= inch >= 0:
+                    print ("Hah troubles reaching the shelves "+ name +"?")
+                    line()
+                elif 4 > ft >= 0 and 12 >= inch >= 0:
+                    print("Okay sure buddy.. Too late to change now.")
+                    line()
+            except ValueError:
+                print("<-<--<---ERROR--->-->->\n== Dude numbers only ==\n------ TRY AGAIN ------")
+                continue 
+        except ValueError:
+                print("<-<--<---ERROR--->-->->\n== Dude numbers only ==\n------ TRY AGAIN ------")
+                continue
+        return ft, inch
+
 initial_q()
 sys_check()
 rate_q()
 name = name_q()
 age = age_q(name)
+ft, inch = height_q(name)
+
+print(name,age,ft,inch)
