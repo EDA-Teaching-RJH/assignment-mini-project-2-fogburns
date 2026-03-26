@@ -171,6 +171,27 @@ def colour_q():
             print("<-<--<---ERROR--->-->->\n==== Aa -Zz Only ====\n------ TRY AGAIN ------")
         return colour
     
+def sibling_q():
+    while True:
+        try:
+            sib = int(input("- 5 - How many brothers and sisters u got on this earth?>>"))
+            if 20 >= sib > 4:
+                print("Damn your mumma tryna build an army? aint judging brother..")
+                line()
+            elif 4 >= sib >= 1:
+                print("Yeah thats pretty average you aint cool")
+                line()
+            elif sib == 0:
+                print("Bro I dont even know what to tell ya, make some friends I guess lol")
+                line()
+            else:
+                print("<-<--<---ERROR--->-->->\n== Not even possible ==\n------ TRY AGAIN ------")
+                continue
+        except ValueError:
+                print("<-<--<---ERROR--->-->->\n== Dude numbers only ==\n------ TRY AGAIN ------")
+                continue
+        return sib
+
 initial_q()
 sys_check()
 rate_q()
@@ -178,5 +199,6 @@ name = name_q()
 age = age_q(name)
 ft, inch = height_q(name)
 colour = colour_q()
+sibling = sibling_q()
 
-print(name,age,ft,inch,colour)
+print(name,age,ft,inch,colour,sibling)
