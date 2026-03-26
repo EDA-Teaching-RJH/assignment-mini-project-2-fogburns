@@ -1,6 +1,7 @@
 import sys
 import cowsay
 import re
+from calc import Calculator
 
 stard={"Capricorn":2.3,"Gemini":3.4,"Saggitarius":4.5,"Cancer":5.6,"Taurus":6.7,"Scorpio":7.8,"Aquarius":8.9,"Aries":9.1,"Leo":10.2,"Libra":11.3,"Pisces":12.4,"Virgo":13.5}
 colourd={'Red':2,"Orange":3,"Yellow":4,"Green":5,"Blue":6,"Indigo":7,"Violet":8}
@@ -299,5 +300,6 @@ star = star_q()
 erate = erate_q(rate,name)
 stars = check_star(star)
 colours = check_colour(colour)
+time = Calculator.compute(erate, rate, stars, ft, inch, colours, sibling, wage, age)
 
-print(name,age,ft,inch,colour,sibling,wage,yn_1,star,erate,stars,colours)
+print(name,age,ft,inch,colour,sibling,wage,yn_1,star,erate,stars,colours,time)
