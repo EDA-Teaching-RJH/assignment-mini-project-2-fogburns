@@ -4,20 +4,19 @@ import re
 from calc import Calculator
 import random
 import json
-'''Import modules, to be used later in code'''
+'''Import modules, to be used later in code: collect, compute and save data'''
 
 stard={"Capricorn":2.3,"Gemini":3.4,"Saggitarius":4.5,"Cancer":5.6,"Taurus":6.7,"Scorpio":7.8,"Aquarius":8.9,"Aries":9.1,"Leo":10.2,"Libra":11.3,"Pisces":12.4,"Virgo":13.5}
 colourd={'Red':2,"Orange":3,"Yellow":4,"Green":5,"Blue":6,"Indigo":7,"Violet":8}
-'''Dictionaries to return keys for values, mainly used for calculations'''
+'''Maps starsigns and colours to values, used for calculation'''
 
-names = ["Player","Alex","Sam","Jamie","Jack"] #Available random names
+names = ["Player","Alex","Sam","Jamie","Jack"] #Used for autofill()
 y_l = ["yes", "y"]
 n_l = ["no", "n"]
 yn_l =[y_l,n_l]
-'''Lists mainly used for checking input'''
 
 def line():
-    '''Line function, simplifies code later on to be easily read. Ensures same line is printed each time'''
+    '''Prints a line, simplifies code later on to be easily read. Ensures same line is printed each time'''
     print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^") 
     return
 
@@ -30,7 +29,7 @@ def sys_check():
     else:
         print("System check passed. Running on Python ",major,".",minor)
 
-def get_yn(user_input):
+def get_yn(user_input): # Uses input from multiple different functions
     '''Simplifies code, makes other functions easier to read. Used when a yes or no input is required'''
     while True:
         yn_in = user_input.strip().lower()
@@ -39,11 +38,11 @@ def get_yn(user_input):
         elif yn_in in (n_l):
             return False  # Returns as bool
         else:
-            print("<-<--<---ERROR--->-->->\n== Simple yes or no ==\n------ TRY AGAIN ------")
+            print("<-<--<---ERROR--->-->->\n== Simple yes or no ==\n------ TRY AGAIN ------") # Error handling
             return None # Returns as bool
         
 def initial_q():
-    '''Initial question to start the rest of the script'''
+    '''Initial question to start the rest of the script, yes or no only.'''
     while True:
         cowsay.trex("WELCOME!")
         user_input = input("Want to do some epic questionaire? Y/N>> ")
@@ -59,7 +58,7 @@ def initial_q():
         break
 
 def rate_q():
-    '''Promps user to give a rating of the cosway.trex'''
+    '''Promps user to give a rating of the cosway.trex, numbers only.'''
     while True:
             rat = input("Before we do this, how would you rate this dino out of 10?>>") 
             try:
@@ -77,7 +76,7 @@ def rate_q():
                     print("Oh and you have seen better?. Yeah think next time")
                     line()
                 else:
-                    print("<-<--<---ERROR--->-->->\n== Not even possible ==\n------ TRY AGAIN ------")
+                    print("<-<--<---ERROR--->-->->\n== Not even possible ==\n------ TRY AGAIN ------") # Error handling
                     continue
                 return rate
             except ValueError:
@@ -86,24 +85,24 @@ def rate_q():
                     print("Okayy pedantic much?. I can tell this will be, Fun.")
                     line()
                 except ValueError:
-                    print("<-<--<---ERROR--->-->->\n== Dude numbers only ==\n------ TRY AGAIN ------")
+                    print("<-<--<---ERROR--->-->->\n== Dude numbers only ==\n------ TRY AGAIN ------") # Error handling
                     continue
                 return rate
 
 def name_q():
-    '''Asks user for name, used in other parts of code to feel tailored to user. Also used when giving results of survey'''
+    '''Asks user for name, letters only. Used in diologue for user. Also used when giving/saving results of survey'''
     while True:
         name = input("- 1 - Okay whats your name?>>").strip().title() # Unnessacary whitespace is removed and first letter is capitalised if not
-        if re.match("^[a-zA-Z]+$", name): # Runs to only allow normal string letter input (Aa - Zz)
+        if re.match("^[a-zA-Z]+$", name):
             print("Wavvy bones "+ name +" cool name. alright NEXT QUESTION!")
             line()
         else:
-            print("<-<--<---ERROR--->-->->\n== Aa -Zz Only ==\n------ TRY AGAIN ------") 
+            print("<-<--<---ERROR--->-->->\n== Aa -Zz Only ==\n------ TRY AGAIN ------")  # Error handling
             continue
         return name
     
 def age_q(name): # Accessing the name of input from user to be used inside function
-    '''Prompts user to give their age, used in calculations and some dialogue options'''
+    '''Prompts user to give their age, numbers only. Used in calculations and some dialogue options'''
     while True:
         try:
             age = int(input("- 2 - How old are you "+ str(name) +"?>>")) 
@@ -124,23 +123,23 @@ def age_q(name): # Accessing the name of input from user to be used inside funct
                 print("It does not look good lying about your age like that.. Try again")
                 continue
             else:
-                print("<-<--<---ERROR--->-->->\n== Not even possible ==\n------ TRY AGAIN ------")
+                print("<-<--<---ERROR--->-->->\n== Not even possible ==\n------ TRY AGAIN ------") # Error handling
                 continue
             return age
-        except ValueError: # If anything else than a number gets input
-            print("<-<--<---ERROR--->-->->\n== Dude numbers only ==\n------ TRY AGAIN ------")
+        except ValueError:
+            print("<-<--<---ERROR--->-->->\n== Dude numbers only ==\n------ TRY AGAIN ------") # Error handling
             continue    
 
-def height_q(name):
-    '''Prompts user of their height in ft and inches'''
+def height_q(name): # Uses defined variables as parameters to be used inside the function
+    '''Prompts user of their height in ft and inches, numbers only'''
     while True:
         try:
             ft, inch = map(int, input("- 3 - How tall are you in ft? Invasive question? complain to my boss\n(Show as: eg 6ft 1inch = 6 1)>>").split()) # Maps both variables as integers
             if inch > 12:
-                print("<-<--<---ERROR--->-->->\n----- Quit Lying -----\n------ TRY AGAIN ------")
+                print("<-<--<---ERROR--->-->->\n----- Quit Lying -----\n------ TRY AGAIN ------") # Error handling
                 continue
             elif inch <= 0 or inch < 0:
-                print("<-<--<---ERROR--->-->->\n- A minus number huh? -\n------ TRY AGAIN ------")
+                print("<-<--<---ERROR--->-->->\n- A minus number huh? -\n------ TRY AGAIN ------") # Error handling
                 continue
             try:
                 if ft >=6 and 12 >= inch >= 7:
@@ -164,33 +163,33 @@ def height_q(name):
                     print("Okay sure buddy.. Too late to change now.")
                     line()
             except ValueError:
-                print("<-<--<---ERROR--->-->->\n== Dude numbers only ==\n------ TRY AGAIN ------")
+                print("<-<--<---ERROR--->-->->\n== Dude numbers only ==\n------ TRY AGAIN ------") # Error handling
                 continue 
         except ValueError:
-                print("<-<--<---ERROR--->-->->\n== Dude numbers only ==\n------ TRY AGAIN ------")
+                print("<-<--<---ERROR--->-->->\n== Dude numbers only ==\n------ TRY AGAIN ------") # Error handling
                 continue
         return ft, inch
     
 def colour_q():
-    '''Prompts user for their favourite colour'''
+    '''Prompts user for their favourite colour, letters only'''
     while True:
         try:
             colour = str(input("- 4 - Choose ur most favourite rainbow colour \n--->Red   Orange   Yellow   Green   Blue   Indigo   Violet<--- >>")).strip().title() # Takes away unnessacary whitespace and titles input
             if not re.match("^[a-zA-Z]+$", colour):
-                print("<-<--<---ERROR--->-->->\n==== Aa -Zz Only ====\n------ TRY AGAIN ------")
+                print("<-<--<---ERROR--->-->->\n==== Aa -Zz Only ====\n------ TRY AGAIN ------") # Error handling
                 continue
             elif colour not in colourd: # References the dictionary at top of code
-                print("<-<--<---ERROR--->-->->\n---- Dude, ROYGBIV ----\n------ TRY AGAIN ------")
+                print("<-<--<---ERROR--->-->->\n---- Dude, ROYGBIV ----\n------ TRY AGAIN ------") # Error handling
                 continue
             else:
                 print("Ahaaahh..I usedd to see colours like that too my dude")
                 line()
         except ValueError:
-            print("<-<--<---ERROR--->-->->\n==== Aa -Zz Only ====\n------ TRY AGAIN ------")
+            print("<-<--<---ERROR--->-->->\n==== Aa -Zz Only ====\n------ TRY AGAIN ------") # Error handling
         return colour
     
 def sibling_q():
-    '''Prompts user of the amount of siblings they have'''
+    '''Prompts user of the amount of siblings they have, numbers only. Used in calculation'''
     while True:
         try:
             sib = int(input("- 5 - How many brothers and sisters u got on this earth?>>"))
@@ -204,21 +203,22 @@ def sibling_q():
                 print("Bro I dont even know what to tell ya, make some friends I guess lol")
                 line()
             else:
-                print("<-<--<---ERROR--->-->->\n== Not even possible ==\n------ TRY AGAIN ------")
+                print("<-<--<---ERROR--->-->->\n== Not even possible ==\n------ TRY AGAIN ------") # Error handling
                 continue
         except ValueError:
-                print("<-<--<---ERROR--->-->->\n== Dude numbers only ==\n------ TRY AGAIN ------")
+                print("<-<--<---ERROR--->-->->\n== Dude numbers only ==\n------ TRY AGAIN ------") # Error handling
                 continue
         return sib
 
-def job_q(name, age):
+def job_q(name, age): # Uses defined variables as parameters to be used inside the function
+    '''Prompts user for vage job info, yes or no and float/int only. Used in calculation'''
     while True:
         user_input = (input("- 6 - You worked a day in ur life? Y/N>>")) 
         yn_1 = get_yn(user_input)
         if yn_1 == True:
             print("Oh nice I like seeing a contributing member of society")
             line()
-            try:
+            try: # Only happens if they say yes in the get_yn() function
                 wage = float(input("- 6.5 - How much do/did you make an hour?>>")) 
                 if wage >= 15:
                     print("Okayy if u say so I mean I cant force u to tell the truth..")
@@ -227,7 +227,7 @@ def job_q(name, age):
                     print("Hard life "+ name + " bro, GET UR MONEY UP")
                     line()
             except ValueError:
-                print("<-<--<---ERROR--->-->->\n== Dude numbers only ==\n------ TRY AGAIN ------")
+                print("<-<--<---ERROR--->-->->\n== Dude numbers only ==\n------ TRY AGAIN ------")# Error handling
                 continue
             return wage, yn_1
         elif yn_1 == False:
@@ -237,26 +237,28 @@ def job_q(name, age):
             return wage, yn_1
 
 def star_q():
+    '''Prompts user of their starsign, letters only . Used for calculaion'''
     while True:
         try:
             sta = str(input("- 7 - Okay lets get atrological whats your star sign?>>"))
             star = sta.strip().title()
-            if not re.match("^[a-zA-Z]+$", star):
-                print("<-<--<---ERROR--->-->->\n==== Aa -Zz Only ====\n------ TRY AGAIN ------")
+            if not re.match("^[a-zA-Z]+$", star): # Uses re module for easy filters
+                print("<-<--<---ERROR--->-->->\n==== Aa -Zz Only ====\n------ TRY AGAIN ------") # Error handling
                 continue
             elif star not in stard:
-                print("<-<--<---ERROR--->-->->\n--- Is that a sign? ---\n------ TRY AGAIN ------")
+                print("<-<--<---ERROR--->-->->\n--- Is that a sign? ---\n------ TRY AGAIN ------") # Error handling
                 continue
             else:
                 print("Oo.. I hear bad things from your.. type. Moving on")
                 line()
                 break
         except ValueError:
-            print("<-<--<---ERROR--->-->->\n==== Aa -Zz Only ====\n------ TRY AGAIN ------")
+            print("<-<--<---ERROR--->-->->\n==== Aa -Zz Only ====\n------ TRY AGAIN ------") # Error handling
             continue
     return star
 
-def erate_q(rate, name):
+def erate_q(rate, name): # Uses defined variables as parameters to be used inside the function
+    '''Prompts user for a final rating of survey, numbers only 0-20. Used in calculation'''
     while True:
         rate_2 = input("Okay now you have seen whats what, whats the rating now out of 10??>>")
         try:
@@ -283,31 +285,34 @@ def erate_q(rate, name):
                 print("You will regret this...")
                 line()
             else:
-                print("<-<--<---ERROR--->-->->\n== Not even possible ==\n------ TRY AGAIN ------")
+                print("<-<--<---ERROR--->-->->\n== Not even possible ==\n------ TRY AGAIN ------") # Error handling
                 continue
             return erate
         except ValueError:
             try:
                 erate = float(rate_2)
-                if isinstance(erate, float) and isinstance(rate, float):
+                if isinstance(erate, float) and isinstance(rate, float): # Asks if erate and rate are float
                     print("Okayyy dude you dont have to be so serious.. Seriously get some friends")
-                elif isinstance(erate, float) and isinstance(rate, int):
+                elif isinstance(erate, float) and isinstance(rate, int): # Asks if erate is float and rate is float
                     print("Hmm weirdly specific but okay")
             except ValueError:
-                print("<-<--<---ERROR--->-->->\n==== Dude numbers only ====\n------ TRY AGAIN ------")
+                print("<-<--<---ERROR--->-->->\n==== Dude numbers only ====\n------ TRY AGAIN ------") # Error handling
                 continue
             return erate
 
-def check_colour(colour):
+def check_colour(colour): 
+    '''Returns colours as a number for calculation'''
     return colourd.get(colour, 0)
 
 def check_star(star):
+    '''Returns starsigns as a number for calculation'''
     return stard.get(star, 0.0)
 
 def auto_fill():
+    '''If user decides to auto fill, returns all variables randomly'''
     seed = None
     if seed is not None:
-        random.seed(seed)
+        random.seed(seed) # Sets no value to seed to remove predictable randomness
     return {"rate": random.randint(1, 10),
         "name": random.choice(names),
         "age": random.randint(18, 40),
@@ -321,17 +326,19 @@ def auto_fill():
         "erate": random.randint(1, 10)}
 
 def save_r(results):
-    filename = "results.json"
+    '''Saves results to a file'''
+    filename = "results.json" # Name of file to which the results are saved to
     try:
         with open(filename, 'w', newline='') as file:
             json.dump(results, file, indent=4)
             print("Results saved successfully!")
             print(f"Results saved to {filename}")
     except ValueError:
-        print("An error occurred while saving the results.\n", ValueError)
+        print("An error occurred while saving the results.\n", ValueError) # If error occurs it will explain what happened and prompt you to try again
         keep_r(results)
 
 def keep_r(name,age,ft,inch,colour,sibling,yn_1,wage,star,trate,yrs,mnts,dys,hrs,days,months,years):
+    '''Prompts user to save result, if yes returns as a dictionary formatted for a file'''
     while True:
         user_input = input("Would you want to keep the results? Y/N>>")
         yn_2 = get_yn(user_input)
@@ -354,6 +361,7 @@ def keep_r(name,age,ft,inch,colour,sibling,yn_1,wage,star,trate,yrs,mnts,dys,hrs
             exit()
 
 def main():
+    '''Gains all values for variables, prints them for the user and decides the order or functions'''
     initial_q()
     sys_check()
     user_input = input("Auto fill survey? Y/N>> ")
