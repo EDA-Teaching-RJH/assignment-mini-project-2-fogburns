@@ -311,6 +311,15 @@ days = death_date[2]
 months = death_date[1]
 years = death_date[0]
 
-print(name,age,ft,inch,colour,sibling,wage,yn_1,star,erate,stars,colours,time)
-print(hrs,dys,mnts,yrs)
-print(days,months,years)
+cowsay.trex("RESULTS")
+print("Consent: Yes")
+print("-1- Name: "+ name)
+print("-2- Age: "+str(age))
+print("-3- Height: "+str(ft)+"ft,"+str(inch)+"inch")
+print("-4- Fav colour: "+colour)
+print("-5- Siblings: "+str(sibling))
+print("-6- Job?: "+str(yn_1)+"           -6.5- Wage: "+str(wage)+"/Hour")
+print("-7- Starsign: "+star)
+print("-8- Rating: "+str(trate)+"/10")
+print("-9- You will die in: "+yrs+" years, "+mnts+" months, "+dys+" days, and "+hrs+" hours")
+print("-10- Death date: ", days,"/",months,"/",years)
