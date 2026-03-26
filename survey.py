@@ -2,7 +2,9 @@ import sys
 import cowsay
 import re
 from calc import Calculator
+import random
 
+names = ["Player","Alex","Sam","Jamie","Jack"]
 stard={"Capricorn":2.3,"Gemini":3.4,"Saggitarius":4.5,"Cancer":5.6,"Taurus":6.7,"Scorpio":7.8,"Aquarius":8.9,"Aries":9.1,"Leo":10.2,"Libra":11.3,"Pisces":12.4,"Virgo":13.5}
 colourd={'Red':2,"Orange":3,"Yellow":4,"Green":5,"Blue":6,"Indigo":7,"Violet":8}
 y_l = ["yes", "y"]
@@ -287,39 +289,73 @@ def check_colour(colour):
 def check_star(star):
     return stard.get(star, 0.0)
 
-initial_q()
-sys_check()
-rate = rate_q()
-name = name_q()
-age = age_q(name)
-ft, inch = height_q(name)
-colour = colour_q()
-sibling = sibling_q()
-wage, yn_1 = job_q(name, age)
-star = star_q()
-erate = erate_q(rate,name)
-stars = check_star(star)
-colours = check_colour(colour)
-time = Calculator.compute(erate, rate, stars, ft, inch, colours, sibling, wage, age)
-hrs = time["Hours"]
-dys = time["Days"]
-mnts = time["Months"]
-yrs = time["Years"]
-trate = time["trate"]
-death_date = Calculator.death_date(yrs, mnts, dys)
-days = death_date[2]
-months = death_date[1]
-years = death_date[0]
+def auto_fill():
+    seed = None
+    if seed is not None:
+        random.seed(seed)
+    return {"rate": random.randint(1, 10),
+        "name": random.choice(names),
+        "age": random.randint(18, 40),
+        "ft": random.randint(4, 6),
+        "inch": random.randint(0, 11),
+        "colour": random.choice(list(colourd.keys())),
+        "siblings": random.randint(0, 6),
+        "job": "Yes",
+        "wage": round(random.uniform(8.0, 25.0), 2),
+        "star": random.choice(list(stard.keys())),
+        "erate": random.randint(1, 10)}
 
-cowsay.trex("RESULTS")
-print("Consent: Yes")
-print("-1- Name: "+ name)
-print("-2- Age: "+str(age))
-print("-3- Height: "+str(ft)+"ft,"+str(inch)+"inch")
-print("-4- Fav colour: "+colour)
-print("-5- Siblings: "+str(sibling))
-print("-6- Job?: "+str(yn_1)+"           -6.5- Wage: "+str(wage)+"/Hour")
-print("-7- Starsign: "+star)
-print("-8- Rating: "+str(trate)+"/10")
-print("-9- You will die in: "+yrs+" years, "+mnts+" months, "+dys+" days, and "+hrs+" hours")
-print("-10- Death date: ", days,"/",months,"/",years)
+def main():
+    initial_q()
+    sys_check()
+    user_input = input("Auto fill survey? Y/N>> ")
+    yn_2 = get_yn(user_input)
+    if yn_2 == True:
+        data = auto_fill()
+        rate = data["rate"]
+        name = data["name"]
+        age = data["age"]
+        ft = data["ft"]
+        inch = data["inch"]
+        colour = data["colour"]
+        sibling = data["siblings"]
+        yn_1 = data["job"]
+        wage = data["wage"]
+        star = data["star"]
+        erate = data["erate"]
+    elif yn_2 == False:
+        rate = rate_q()
+        name = name_q()
+        age = age_q(name)
+        ft, inch = height_q(name)
+        colour = colour_q()
+        sibling = sibling_q()
+        wage, yn_1 = job_q(name, age)
+        star = star_q()
+        erate = erate_q(rate,name)
+    stars = check_star(star)
+    colours = check_colour(colour)
+    time = Calculator.compute(erate, rate, stars, ft, inch, colours, sibling, wage, age)
+    hrs = time["Hours"]
+    dys = time["Days"]
+    mnts = time["Months"]
+    yrs = time["Years"]
+    trate = time["trate"]
+    death_date = Calculator.death_date(yrs, mnts, dys)
+    days = death_date[2]
+    months = death_date[1]
+    years = death_date[0]
+
+    cowsay.trex("RESULTS")
+    print("Consent: Yes")
+    print("-1- Name: "+ name)
+    print("-2- Age: "+str(age))
+    print("-3- Height: "+str(ft)+"ft,"+str(inch)+"inch")
+    print("-4- Fav colour: "+colour)
+    print("-5- Siblings: "+str(sibling))
+    print("-6- Job?: "+str(yn_1)+"           -6.5- Wage: "+str(wage)+"/Hour")
+    print("-7- Starsign: "+star)
+    print("-8- Rating: "+str(trate)+"/10")
+    print("-9- You will die in: "+yrs+" years, "+mnts+" months, "+dys+" days, and "+hrs+" hours")
+    print("-10- Death date: ", days,"/",months,"/",years)
+main()
