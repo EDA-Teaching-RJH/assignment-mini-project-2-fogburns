@@ -317,6 +317,28 @@ def save_r(results):
         print("An error occurred while saving the results.\n", ValueError)
         keep_r(results)
 
+def keep_r(name,age,ft,inch,colour,sibling,yn_1,wage,star,trate,yrs,mnts,dys,hrs,days,months,years):
+    while True:
+        user_input = input("Would you want to keep the results? Y/N>>")
+        yn_2 = get_yn(user_input)
+        if yn_2 == True:
+            print("Saving results...")
+            results = {"Name: ":name,
+                    "Age: ":age,
+                    "Height: ":f"{ft}ft {inch}inch",
+                    "Colour: ":colour,
+                    "Siblings: ":sibling,
+                    "Job: ":f"{yn_1},Wage: ,{wage}/Hour",
+                    "Starsign: ":star,
+                    "Rating: ":trate,
+                    "Time left: ":f"{yrs} years, {mnts} months, {dys} days, {hrs} hours",
+                    "Death date: ":f"{days}/{months}/{years}"}
+            save_r(results)
+            exit()
+        elif yn_2 == False:
+            print("Returning...")
+            exit()
+
 def main():
     initial_q()
     sys_check()
@@ -344,7 +366,7 @@ def main():
         sibling = sibling_q()
         wage, yn_1 = job_q(name, age)
         star = star_q()
-        erate = erate_q(rate,name)
+        erate = erate_q(rate, name)
     stars = check_star(star)
     colours = check_colour(colour)
     time = Calculator.compute(erate, rate, stars, ft, inch, colours, sibling, wage, age)
@@ -370,4 +392,5 @@ def main():
     print("-8- Rating: "+str(trate)+"/10")
     print("-9- You will die in: "+yrs+" years, "+mnts+" months, "+dys+" days, and "+hrs+" hours")
     print("-10- Death date: ", days,"/",months,"/",years)
+    keep_r(name,age,ft,inch,colour,sibling,yn_1,wage,star,trate,yrs,mnts,dys,hrs)
 main()
