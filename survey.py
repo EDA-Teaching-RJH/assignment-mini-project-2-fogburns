@@ -280,6 +280,11 @@ def erate_q(rate, name):
                 continue
             return erate
 
+def check_colour(colour):
+    return colourd.get(colour, 0)
+
+def check_star(star):
+    return stard.get(star, 0.0)
 
 initial_q()
 sys_check()
@@ -292,4 +297,7 @@ sibling = sibling_q()
 wage, yn_1 = job_q(name, age)
 star = star_q()
 erate = erate_q(rate,name)
-print(name,age,ft,inch,colour,sibling,wage,yn_1,star,erate)
+stars = check_star(star)
+colours = check_colour(colour)
+
+print(name,age,ft,inch,colour,sibling,wage,yn_1,star,erate,stars,colours)
