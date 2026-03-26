@@ -1,5 +1,6 @@
 import random
 from dataclasses import dataclass
+from datetime import datetime
 
 @dataclass
 class Timetype:
@@ -8,7 +9,7 @@ class Timetype:
     days: int
     hours: int
     trate: float
-    
+
 class Calculator:
     def __init__(self, seed=None):
         self.rng = random.Random(seed)
@@ -24,3 +25,9 @@ class Calculator:
         hrs=str(round(((hrs%8765)%730)%24))
         return {"Years":yrs,"Months":mnts,"Days":dys,"Hours":hrs,"trate":trate}
     
+    def death_date(yrs, mnts, dys):
+        dt = datetime.now()
+        years = dt.year + int(yrs)
+        months = dt.month + int(mnts)
+        days = dt.day + int(dys)
+        return years, months, days

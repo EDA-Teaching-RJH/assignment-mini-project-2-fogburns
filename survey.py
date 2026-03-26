@@ -301,5 +301,16 @@ erate = erate_q(rate,name)
 stars = check_star(star)
 colours = check_colour(colour)
 time = Calculator.compute(erate, rate, stars, ft, inch, colours, sibling, wage, age)
+hrs = time["Hours"]
+dys = time["Days"]
+mnts = time["Months"]
+yrs = time["Years"]
+trate = time["trate"]
+death_date = Calculator.death_date(yrs, mnts, dys)
+days = death_date[2]
+months = death_date[1]
+years = death_date[0]
 
 print(name,age,ft,inch,colour,sibling,wage,yn_1,star,erate,stars,colours,time)
+print(hrs,dys,mnts,yrs)
+print(days,months,years)
