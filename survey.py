@@ -2,6 +2,7 @@ import sys
 import cowsay
 import re
 
+colourd={'Red':2,"Orange":3,"Yellow":4,"Green":5,"Blue":6,"Indigo":7,"Violet":8}
 y_l = ["yes", "y"]
 n_l = ["no", "n"]
 yn_l =[y_l,n_l]
@@ -152,12 +153,30 @@ def height_q(name):
                 print("<-<--<---ERROR--->-->->\n== Dude numbers only ==\n------ TRY AGAIN ------")
                 continue
         return ft, inch
-
+    
+def colour_q():
+    while True:
+        try:
+            colour = str(input("- 4 - Choose ur most favourite rainbow colour \n--->Red   Orange   Yellow   Green   Blue   Indigo   Violet<--- >>")).strip().title() 
+            if not re.match("^[a-zA-Z]+$", colour):
+                print("<-<--<---ERROR--->-->->\n==== Aa -Zz Only ====\n------ TRY AGAIN ------")
+                continue
+            elif colour not in colourd:
+                print("<-<--<---ERROR--->-->->\n---- Dude, ROYGBIV ----\n------ TRY AGAIN ------")
+                continue
+            else:
+                print("Ahaaahh..I usedd to see colours like that too my dude")
+                line()
+        except ValueError:
+            print("<-<--<---ERROR--->-->->\n==== Aa -Zz Only ====\n------ TRY AGAIN ------")
+        return colour
+    
 initial_q()
 sys_check()
 rate_q()
 name = name_q()
 age = age_q(name)
 ft, inch = height_q(name)
+colour = colour_q()
 
-print(name,age,ft,inch)
+print(name,age,ft,inch,colour)
