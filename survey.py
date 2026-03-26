@@ -85,8 +85,37 @@ def name_q():
             print("Wavvy bones "+ name +" cool name. alright NEXT QUESTION!")
             line()
         return name
+    
+def age_q(name):
+    while True:
+        try:
+            age = int(input("- 2 - How old are you "+ str(name) +"?>>")) 
+            if 80 >= age >= 65:
+                print("And you operated this machine? Impressive but I wouldnt hold out "+ name)
+                line()
+            elif 65 > age >= 35:
+                print("Oh would never had guessed, still paying off debt? GOODLUCK")
+            elif 35 >= age >= 20:
+                print("Okayy golden age huh? Hows it feel?.. Yeah we can move on.")
+                line()
+            elif 20 > age >= 8:
+                print("Still tryna make it in life? Goodluck I uh.. Believe in. You, yeah..")
+                line()
+            elif 8 > age >= 4:
+                print("Okay then " + name + " a abit young to be playing this but sure")
+            elif age < 4 and age >= 0:
+                print("It does not look good lying about your age like that.. Try again")
+                continue
+            else:
+                print("<-<--<---ERROR--->-->->\n== Not even possible ==\n------ TRY AGAIN ------")
+                continue
+            return age
+        except ValueError:
+            print("<-<--<---ERROR--->-->->\n== Dude numbers only ==\n------ TRY AGAIN ------")
+            continue    
 
 initial_q()
 sys_check()
 rate_q()
-name_q()
+name = name_q()
+age = age_q(name)
