@@ -362,8 +362,8 @@ def keep_r(name,age,ft,inch,colour,sibling,yn_1,wage,star,trate,yrs,mnts,dys,hrs
 
 def main():
     '''Gains all values for variables, prints them for the user and decides the order or functions'''
-    initial_q()
     sys_check()
+    initial_q()
     while True:
         user_input = input("Auto fill survey? Y/N>> ")
         yn_2 = get_yn(user_input)
