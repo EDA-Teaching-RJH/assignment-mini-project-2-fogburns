@@ -15,7 +15,7 @@
 
 - erate_q(): used isinstance to check if 'erate' and 'rate' is float or integers and prints dependant on that
 
-- save_r(): used to save results to a downloadable file, first tried with csv but became complicated trying to print in certain ways, found that json was easier to format my data and looked cleaner code wise(Lecture 8, Lecture 7)
+- save_r(): used to save results to a downloadable file, first tried with csv but became complicated trying to print in certain ways, found that json was easier to format my data and looked cleaner code wise. with this can also see last completed survey(Lecture 8, Lecture 7)
 
 - line(): simplify rest of code and make it easier to read
 
