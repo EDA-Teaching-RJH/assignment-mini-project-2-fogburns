@@ -21,7 +21,7 @@
 
 - line(423)survey.py: Uses an if statement to tell whether the code is being imported. If it is it wont run, This will stop any errors if the script is imported.(Workshop/Lecture 7)
 
-- line(14)calc.py: similar to the above it will only run if the file is being imported as its not suppose to be ran directly
+- line(14)calc.py: similar to the above it will only run if the file is being imported as its not suppose to be ran directly(Workshop/Lecture 7)
 
 - calc.py: Used to simplify main() function aswell as making it easier to read, computed all data in seperate file, returns processed data, including dates of estimated death so the main() function can print easily, had difficulty printing the date correctly (only wanted to print as YY/MM/DD, I wanted the reversed order), so I had to assign a variable to each value of the date then print as I want. Used class to group these functions together, self.rng to create reproducable results if seed is provided in main script, used for testing to give same results each time to simplify things. Uses random to create different results each time. (workshop 7,Lecture 9, Lecture 7)
 
