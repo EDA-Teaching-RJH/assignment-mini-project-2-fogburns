@@ -419,4 +419,6 @@ def main():
     print("-9- You will die in: "+yrs+" years, "+mnts+" months, "+dys+" days, and "+hrs+" hours")
     print("-10- Death date: ", days,"/",months,"/",years)
     keep_r(name,age,ft,inch,colour,sibling,yn_1,wage,star,trate,yrs,mnts,dys,hrs,days,months,years)
-main()
+
+if __name__ == "__main__":
+    main()
